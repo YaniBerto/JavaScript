@@ -1,6 +1,66 @@
-body {background-color: aquamarine;
-width: 100%;
+*{
+margin:0;
+padding: 0;
+max-width: 100%;
+font-family: "Open Sans", sans-serif;}
+body {background-color: aquamarine;}
+
+.logo
+{width: 10rem;
 height: auto;}
 header{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
     }
+h2{
+    display: flex;
+    justify-content: center;
+
+}
+ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 350px;
+    margin-left: 0 ;
+}
+.precios{
+    display: flex;
+    align-items: center;
+    margin-top: 5%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: yellowgreen;
+    width: 100%;
+}    
+    .caja_galeria {
+        display: flex;
+        flex-direction: row;
+        margin-top: 0;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        background-color: #0B6E4F;
+        width: 100%;
+      }
+      .galeria {
+        display: flex;
+        justify-content: space-around;
+      }
+      .galeria img {
+        display: flex;
+        border-color: #DDB771;
+        border-style: solid;
+        border-radius: 1%;
+        margin: 1%;
+        width: 20%;
+        height: auto;
+        transition: 0.5s;
+        object-fit: cover;
+      }
+      .galeria img:hover {
+        transform: scale(1.5);
+      }
