@@ -7,60 +7,53 @@ body {background-color: aquamarine;}
 
 .logo
 {width: 10rem;
-height: auto;}
+height: auto;
+margin-left: 20px;
+padding: 20px;}
 header{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    margin-left: 20px;
+    ;
     }
 h2{
     display: flex;
-    justify-content: center;
-
+    justify-content: flex-start;
+    font-family: Impact;
+    padding-left: 25px;
+    background-color: #A4778B;
 }
-ul{
-    list-style-type: none;
+.caja_cards {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 350px;
-    margin-left: 0 ;
-}
-.precios{
-    display: flex;
-    align-items: center;
-    margin-top: 5%;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-wrap: wrap;
-    background-color: yellowgreen;
+    gap: 20px;
+    background-color: #C0B298;
+  }
+  .card {
+    background-color:#B6EEA6;
+    display: flex;
+    justify-content: center;
+    width: 350px;
+    margin-left: 50px;
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .card_img {
+    display: flex;
+    justify-items: center;
+    margin-top: 10px;
     width: 100%;
-}    
-    .caja_galeria {
-        display: flex;
-        flex-direction: row;
-        margin-top: 0;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        background-color: #0B6E4F;
-        width: 100%;
-      }
-      .galeria {
-        display: flex;
-        justify-content: space-around;
-      }
-      .galeria img {
-        display: flex;
-        border-color: #DDB771;
-        border-style: solid;
-        border-radius: 1%;
-        margin: 1%;
-        width: 20%;
-        height: auto;
-        transition: 0.5s;
-        object-fit: cover;
-      }
-      .galeria img:hover {
-        transform: scale(1.5);
-      }
+    height: auto;
+  }
+  .card_parrafo {
+    display: flex;
+    color: black;
+    font-size: x-large;
+    font-family: "Open Sans", sans-serif;
+    justify-content: center;
+    margin-bottom: 3%;}
