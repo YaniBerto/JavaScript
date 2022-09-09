@@ -57,7 +57,8 @@ let opcion = parseInt(prompt(`Ingrese opción:
         2 - Agregar modelos
         3 - Eliminar modelos
         4 - Encontrar por marca
-        5 - salir`
+        5 - salir
+        6-`
         )) 
 menu(opcion) }      
 
