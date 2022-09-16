@@ -13,6 +13,11 @@ if (preguntaCliente.toLowerCase() == "si") {
 }
 else { console.log("estos son nuestros productos para niños") }
 
+function compra(){
+    alert("Agregado al carrito")
+}
+
+
 class Articulo {
     constructor(Marca, modelo, precio) {
         this.Marca = Marca,
