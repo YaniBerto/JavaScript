@@ -26,7 +26,7 @@ h2{
     padding-left: 25px;
     background-color: #A4778B;
 }
-/*.caja_cards {
+.caja_cards {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -63,4 +63,4 @@ h2{
       align-items: center;
       height: 50px;
       font-size: large;
-    }*/
+    }

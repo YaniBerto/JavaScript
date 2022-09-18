@@ -7,42 +7,41 @@
     //while (respuesta == "si")
 //}
 
-let boton = document.getElementsByClassName("boton")
-for(let compra of boton){
-    compra.addEventListener("click", ()=>{
-        alert(`Agregado al carrito ${this.modelo}`)
-    }
-    )}
-
-
+//let boton = document.getElementsByClassName("boton")
+//for(let compra of boton){
+ //   compra.addEventListener("click", ()=>{
+   //     alert(`Agregado al carrito ${this.Marca}`)
+   // }
+//    )}
 class Articulo {
 constructor(Marca, imagen, precio, boton) {
         this.Marca = Marca,
-        this.imagen = imagen
-        this.precio = precio
+        this.imagen = imagen,
+        this.precio = precio,
         this.boton = boton
-    }}
-
-mostrarArts(); {
-    (`La Marca es ${this.Marca}, el modelo es ${this.imagen}, y el precio es ${this.precio}, y el boton es ${this.boton}`)
 }
-
+mostrarArts(){
+    console.log(`La marca es ${this.marca}`)
+}}
 const Articulo1 = new Articulo("Fiat", "imagenFiat", 50.000, "b1")
 const Articulo2 = new Articulo("kany", "imgKany", 75.000, "b2")
 const Articulo3 = new Articulo("ninebot", "IMGg30p", 200.000, "b3")
 const Articulo4 = new Articulo("xiaomi", "Imgm365", 400.000, "b4")
 const Articulo5 = new Articulo("minimotors", "Imgspider", 500.000, "b5")
+const Articulo6 = new Articulo("Mobox","imgmobox", 45000, "b6")
+const Articulo7 = new Articulo("Vset", "imgVset", 300000, "b7")
+const Articulo8 = new Articulo("zero", "imgZero", 480000, "b8")
 
 const Arts = []
-Arts.push(Articulo1, Articulo2, Articulo3, Articulo4, Articulo5)
+Arts.push(Articulo1, Articulo2, Articulo3, Articulo4, Articulo5, Articulo6, Articulo7, Articulo8)
 
 let divProductos = document.getElementsByClassName("Productos")
 Arts.forEach((Articulo)=>{
     let nuevoProducto = document.createElement("div")
     nuevoProducto.innerHTML = `<div class="card">
-                            <h3>${Articulo.Marca}</h3>      
+                            <h3>"${Articulo.Marca}"</h3>      
                             <img class="card_img"src="./images/Eagle.jpg">
-                            <p class="">Precio:${Articulo.precio}</p>
+                            <p class="">Precio:"${Articulo.precio}"</p>
                             <button class="boton">AÑADIR AL CARRITO</button>
                             </div>`
 divProductos.append(nuevoProducto)                        
