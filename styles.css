@@ -2,21 +2,31 @@
 margin:0;
 padding: 0;
 max-width: 100%;
-font-family: "Open Sans", sans-serif;}
-body {background-color: aquamarine;}
-
-.logo
+font-family: "Impact", sans-serif;}
+body {background-color: black;}
+.menu{
+ background-color: aliceblue;
+ display: flex;
+ justify-content: flex-end;
+}
+.nombre{
+  font-family: Impact, sans-serif;
+  font-size: xx-large;
+}
+logo
 {width: 10rem;
 height: auto;
 margin-left: 20px;
-padding: 20px;}
+padding: 20px;
+animation-duration: 2s;}
 header{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    background-color: aliceblue;
+    justify-content:space-around;
     align-items: center;
-    margin-left: 20px;
+    margin-left: 0 auto;
     }
 .menu{
 display: flex;
@@ -30,7 +40,32 @@ h2{
     justify-content: flex-start;
     font-family: Impact;
     padding-left: 25px;
-    background-color: #A4778B;
+    background-color: gray;
+}
+li{
+  list-style-type: none;
+}
+.btn-secondary{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+}
+.contacto{
+  color: aliceblue;
+  font-size: larger;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  background-color: aliceblue;
+  width: 100%;
+  height: 400px;
+}
+.botonForm{
+  display: flex;
+  justify-content: flex-end;
 }
 /* .productos{
   background-color:#B6EEA6;
@@ -42,6 +77,15 @@ h2{
   margin-top: 10px;
   margin-bottom: 10px;
 }*/
+.EstilosProductos{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.card{
+  margin: 1rem auto;
+  border: 1px solid black;
+
+}
 .caja_cards {
   display: flex;
   justify-content: center;
@@ -49,37 +93,3 @@ h2{
   gap: 30px;
   background-color: #23b788;
 }
-.card {
-  background-color: #A4778B;
-  display: flex;
-  justify-content: center;
-  width: 400px;
-  margin-left: 50px;
-  height: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.card_img {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-  width: 70%;
-  height: auto;
-}
-.card_parrafo {
-  display: flex;
-  justify-content: center;
-  color: black;
-  font-size: x-large;
-  font-family: "Open Sans", sans-serif;
-  justify-items: center;
-  margin-bottom: 3%;
-}
-  
-    aside{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 50px;
-      font-size: large;
-    }
