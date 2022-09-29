@@ -77,7 +77,7 @@ function buscarPorMarca() {
     console.log(busqueda.value)
     let marcaingresada = Arts.filter((brand) => brand.Marca.toLowerCase() == busqueda.value.toLowerCase())
 
-    if(marcaingresada.length == 0) { 
+    if (marcaingresada.length == 0) { 
         Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -127,13 +127,12 @@ function cargarProductosCarrito(array){
 function compraTotal(array){
     let acumulador = 0
     acumulador = array.reduce((acumulador, productoCarrito)=>{
-        return acumulador + productoCarrito.precio
+    return acumulador + productoCarrito.precio
     },0) 
-    if (acumulador == 0){
-        parrafoCompra.innerHTML = `<p>No hay productos en el carrito</p>`
-    }
-    else{parrafoCompra.innerHTML = `El total de su carrito es ${acumulador}`
-}}
+    acumulador == 0?parrafoCompra.innerHTML = `<p>No hay productos en el carrito</p>`
+    :
+    parrafoCompra.innerHTML = `El total de su carrito es ${acumulador}`
+}
 
 
 
