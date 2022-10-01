@@ -77,25 +77,24 @@ function buscarPorMarca() {
     console.log(busqueda.value)
     let marcaingresada = Arts.filter((brand) => brand.Marca.toLowerCase() == busqueda.value.toLowerCase())
 
-    if (marcaingresada.length == 0) { 
+    marcaingresada.length == 0 ?  
         Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'No se encontró ningún artículo de esa marca',
         }) 
-    }
-    else { 
+        : 
         marcaingresada.forEach((Articulo) => {
         Swal.fire({
         imageUrl: src=`images/${Articulo.Imagen}`,
         text: `El modelo encontrado es: ${Articulo.Modelo}`,
         imageHeight: 500,
         imageAlt: 'A tall image'
-    })
+        })
     let input = document.getElementById("busqueda")
     input.value = " "
 })}
-}
+
 
 let botonCarrito = document.getElementById("botonCarrito")
 let modalBody = document.getElementById("modal-body")
@@ -123,7 +122,6 @@ function cargarProductosCarrito(array){
 })
     compraTotal(array)
 }
-
 function compraTotal(array){
     let acumulador = 0
     acumulador = array.reduce((acumulador, productoCarrito)=>{
@@ -133,6 +131,20 @@ function compraTotal(array){
     :
     parrafoCompra.innerHTML = `El total de su carrito es ${acumulador}`
 }
-
-
-
+botonFinalizarCompra.addEventListener("click", ()=>{finalizarCompra()})
+function finalizarCompra(){
+Swal.fire({
+    title:`Está seguro de realizar la compra?`,
+    icon: `info`,
+    showCancelButton: true,
+    confirmButtonText: `Si`,
+    cancelButtonText: `No`,
+    confirmButtonColor: `blue`,
+    cancelButtonColor: `Black`, 
+})
+}
+//desestructuracion
+const {Marca,precio} = Articulo2
+console.log(Marca, precio)
+const {Modelo}= Articulo3
+console.log(Modelo)
