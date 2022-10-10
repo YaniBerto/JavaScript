@@ -14,37 +14,26 @@ const cargarArticulos = async()=>{
     const data = await response.json()
     console.log(data)
         for (let Articulo of data){
-            let ArticuloNuevo = new Articulo(Articulo.Id, Articulo.Modelo, Articulo.Imagen, Articulo.Marca, Articulo.precio)
+        let ArticuloNuevo = new Articulo (Articulo.Id, Articulo.Modelo, Articulo.Imagen, Articulo.Marca, Articulo.precio)
         Arts.push(ArticuloNuevo)
     }
+localStorage.setItem("Arts", JSON.stringify(Arts)) 
 }
-// const Articulo1 = new Articulo(1,"CS_516","MoboxCS516.jpg", "Mobox",50000)
-// const Articulo2 = new Articulo(2,"F500 F10", "F500F10.jpg","Fiat", 75000)
-// const Articulo3 = new Articulo(3,"C85","KanyC85.jpg","Kany",200000)
-// const Articulo4 = new Articulo(4,"Max G30P","NineBotG30P.jpg","Ninebot", 400000)
-// const Articulo5 = new Articulo(5,"M365","xiaomi m365.png","Xiaomi",500000)
-// const Articulo6 = new Articulo(6,"Dualtron Spider","dualtron-spider.png","Minimotors",45000)
-// const Articulo7 = new Articulo(7,"8","Vsett 8 web 1.jpg","Vsett", 300000)
-// const Articulo8 = new Articulo(8,"10","Zero10x.jpg","Zero", 480000)
-
-
-localStorage.setItem("Arts", JSON.stringify(Arts))
 
 let productosEnCarrito = JSON.parse(localStorage.getItem("carrito")) || []
 
-let divProductos = document.getElementById("Productos")
-function mostrarProductos(array){
-
-    if(localStorage.getItem("Arts")){
+if(localStorage.getItem("Arts")){
     Arts = JSON.parse(localStorage.getItem("Arts"))
 }
 else{
     console.log("seteando por primera vez")
 }
-    cargarArticulos()
-    
+
+let divProductos = document.getElementById("Productos")
+
+function mostrarProductos(array){
 divProductos.innerHTML = ""
-Arts.forEach((Articulo)=>{
+Array.forEach((Articulo)=>{
 let nuevoProducto = document.createElement("div")
 nuevoProducto.innerHTML =`<div id="${Articulo.Modelo}"class="card" style="width: 18rem;">
                         <img class="card-img-top" style="height:250px;" src="images/${Articulo.Imagen}" alt="${Articulo.Modelo}">
@@ -55,13 +44,13 @@ nuevoProducto.innerHTML =`<div id="${Articulo.Modelo}"class="card" style="width:
                         </div>
     </div>`
     divProductos.append(nuevoProducto)
-    
+
     let agregarBtn = document.getElementById(`agregarBtn${Articulo.Modelo}`)
     agregarBtn.addEventListener("click", ()=>{
         agregarAlCarrito(Articulo)
-
     })
 })
+mostrarProductos()
 }
     function agregarAlCarrito(Articulo){
         let articuloAgregado = productosEnCarrito.find((elem)=> (elem.Id == Articulo.Id))
@@ -92,13 +81,6 @@ nuevoProducto.innerHTML =`<div id="${Articulo.Modelo}"class="card" style="width:
         }
         
 let productosEnCarrito = []
-    
-    //let botonCompra = document.getElementById(`agregarBtn${Articulo.Modelo}`)
-    //    for(let compra of botonCompra){
-    //        compra.addEventListener("click", ()=>{
-    //        agregarAlCarrito(Articulo)
-     //   })
-
 
 let botonBusqueda = document.getElementById("btnBuscar")
 botonBusqueda.addEventListener('click',buscarPorMarca)
@@ -165,12 +147,31 @@ function compraTotal(array){
 botonFinalizarCompra.addEventListener("click", ()=>{finalizarCompra()})
 function finalizarCompra(){
 Swal.fire({
-    title:`Está seguro de realizar la compra?`,
-    icon: `info`,
-    showCancelButton: true,
-    confirmButtonText: `Si`,
-    cancelButtonText: `No`,
-    confirmButtonColor: `blue`,
-    cancelButtonColor: `Black`
+        title:`Está seguro de realizar la compra?`,
+        icon: `info`,
+        showCancelButton: true,
+        confirmButtonText: `Si`,
+        cancelButtonText: `No`,
+        confirmButtonColor: `blue`,
+        cancelButtonColor: `Black`
+}).then((result)=>{
+    if (result.isConfirmed){
+        Swal.fire({
+            title: `Compra Realizada`,
+            icon: `Success`,
+            confirmButtonColor: `green`,
+            text: `Muchas Gracias por su compra`,
+    })
+    productosEnCarrito=[]
+    localStorage.removeItem("carrito")
+    }else{
+        Swal.fire({
+            title: `Compra no realizada`,
+            icon: `Info`,
+            text: `La compra no se realizó`,
+            confirmButtonColor: `green`,
+            timer:2000
+        })
+    }
 })
 }}
