@@ -1,33 +1,48 @@
 
 class Articulo {
-constructor(Modelo, Imagen, Marca, precio) {
+constructor(Id, Modelo, Imagen, Marca, precio) {
+        this.Id = Id,
         this.Modelo = Modelo,
         this.Imagen = Imagen,      
         this.Marca = Marca,
         this.precio = precio
 }}
-const Articulo1 = new Articulo("CS_516","MoboxCS516.jpg", "Mobox",50000)
-const Articulo2 = new Articulo("F500 F10", "F500F10.jpg","Fiat", 75000)
-const Articulo3 = new Articulo("C85","KanyC85.jpg","Kany",200000)
-const Articulo4 = new Articulo("Max G30P","NineBotG30P.jpg","Ninebot", 400000)
-const Articulo5 = new Articulo("M365","xiaomi m365.png","Xiaomi",500000)
-const Articulo6 = new Articulo("Dualtron Spider","dualtron-spider.png","Minimotors",45000)
-const Articulo7 = new Articulo("8","Vsett 8 web 1.jpg","Vsett", 300000)
-const Articulo8 = new Articulo("10","Zero10x.jpg","Zero", 480000)
-
 let Arts = []
-if(localStorage.getItem("Arts")){
+
+const cargarArticulos = async()=>{
+    const response = await fetch("articulos.json")
+    const data = await response.json()
+    console.log(data)
+        for (let Articulo of data){
+            let ArticuloNuevo = new Articulo(Articulo.Id, Articulo.Modelo, Articulo.Imagen, Articulo.Marca, Articulo.precio)
+        Arts.push(ArticuloNuevo)
+    }
+}
+// const Articulo1 = new Articulo(1,"CS_516","MoboxCS516.jpg", "Mobox",50000)
+// const Articulo2 = new Articulo(2,"F500 F10", "F500F10.jpg","Fiat", 75000)
+// const Articulo3 = new Articulo(3,"C85","KanyC85.jpg","Kany",200000)
+// const Articulo4 = new Articulo(4,"Max G30P","NineBotG30P.jpg","Ninebot", 400000)
+// const Articulo5 = new Articulo(5,"M365","xiaomi m365.png","Xiaomi",500000)
+// const Articulo6 = new Articulo(6,"Dualtron Spider","dualtron-spider.png","Minimotors",45000)
+// const Articulo7 = new Articulo(7,"8","Vsett 8 web 1.jpg","Vsett", 300000)
+// const Articulo8 = new Articulo(8,"10","Zero10x.jpg","Zero", 480000)
+
+
+localStorage.setItem("Arts", JSON.stringify(Arts))
+
+let productosEnCarrito = JSON.parse(localStorage.getItem("carrito")) || []
+
+let divProductos = document.getElementById("Productos")
+function mostrarProductos(array){
+
+    if(localStorage.getItem("Arts")){
     Arts = JSON.parse(localStorage.getItem("Arts"))
 }
 else{
     console.log("seteando por primera vez")
-
-Arts.push(Articulo1, Articulo2, Articulo3, Articulo4, Articulo5, Articulo6, Articulo7, Articulo8)
-localStorage.setItem("Arts", JSON.stringify(Arts))
 }
-let divProductos = document.getElementById("Productos")
-function mostrarProductos(array){
-
+    cargarArticulos()
+    
 divProductos.innerHTML = ""
 Arts.forEach((Articulo)=>{
 let nuevoProducto = document.createElement("div")
@@ -40,10 +55,29 @@ nuevoProducto.innerHTML =`<div id="${Articulo.Modelo}"class="card" style="width:
                         </div>
     </div>`
     divProductos.append(nuevoProducto)
-
+    
     let agregarBtn = document.getElementById(`agregarBtn${Articulo.Modelo}`)
     agregarBtn.addEventListener("click", ()=>{
         agregarAlCarrito(Articulo)
+
+    })
+})
+}
+    function agregarAlCarrito(Articulo){
+        let articuloAgregado = productosEnCarrito.find((elem)=> (elem.Id == Articulo.Id))
+                if (articuloAgregado == undefined){
+                productosEnCarrito.push(Articulo)
+            localStorage.setItem("carrito", JSON.stringify(productosEnCarrito))
+            Toastify({
+                text: "El producto ya se encuentra en el carrito",
+                duration:2000,
+                gravity: "top",
+                position: "center",
+                className: "Info",
+                    style: {background: "linear-gradiente(to right, #00b09b, #96c93d)",
+                }
+            })
+        }else{
         Toastify({
             text:"Producto agregado al carrito",
             duration: 2000,
@@ -52,23 +86,19 @@ nuevoProducto.innerHTML =`<div id="${Articulo.Modelo}"class="card" style="width:
             className: "Info",
                 style:{
                 background: "linear-gradiente(to right, #00b09b, #96c93d)",
-            }
+        }
         }).showToast();
-    })
-})
-}  
-mostrarProductos() 
+        
+        }
+        
 let productosEnCarrito = []
-
+    
     //let botonCompra = document.getElementById(`agregarBtn${Articulo.Modelo}`)
     //    for(let compra of botonCompra){
     //        compra.addEventListener("click", ()=>{
     //        agregarAlCarrito(Articulo)
      //   })
-        function agregarAlCarrito(Articulo){
-            productosEnCarrito.push(Articulo)
-            localStorage.setItem("carrito", JSON.stringify(productosEnCarrito))
-        }
+
 
 let botonBusqueda = document.getElementById("btnBuscar")
 botonBusqueda.addEventListener('click',buscarPorMarca)
@@ -91,10 +121,10 @@ function buscarPorMarca() {
         imageHeight: 500,
         imageAlt: 'A tall image'
         })
-    let input = document.getElementById("busqueda")
-    input.value = " "
+    
 })}
-
+let input = document.getElementById("busqueda")
+    input.value = ""
 
 let botonCarrito = document.getElementById("botonCarrito")
 let modalBody = document.getElementById("modal-body")
@@ -121,6 +151,7 @@ function cargarProductosCarrito(array){
     </div>`
 })
     compraTotal(array)
+   
 }
 function compraTotal(array){
     let acumulador = 0
@@ -140,11 +171,6 @@ Swal.fire({
     confirmButtonText: `Si`,
     cancelButtonText: `No`,
     confirmButtonColor: `blue`,
-    cancelButtonColor: `Black`, 
+    cancelButtonColor: `Black`
 })
-}
-//desestructuracion
-const {Marca,precio} = Articulo2
-console.log(Marca, precio)
-const {Modelo}= Articulo3
-console.log(Modelo)
+}}
