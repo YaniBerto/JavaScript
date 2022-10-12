@@ -3,40 +3,40 @@
 "Modelo": "CS_516",
 "Imagen":"MoboxCS516.jpg",
 "Marca": "Mobox",
-"Precio": 50000},
+"precio": 50000},
 {
 "Id": 2,
 "Modelo": "C85",
+"Imagen": "KanyC85.jpg",
 "Marca": "Kany",
-"Imagen":  "KanyC85.jpg",
-"Precio": 200000 
+"precio": 200000 
 },
 {
 "Id": 3,
 "Modelo": "Max G30P",
 "Imagen": "NineBotG30P.jpg",
 "Marca": "Ninebot",
-"Precio":  400000
+"precio":  400000
 },
 {
 "Id": 4,
 "Modelo": "M365",
-"Marca": "xiaomi m365.png", 
-"Imagen": "Xiaomi",
-"Precio": 500000
+"Imagen": "xiaomiM365.png",
+"Marca":  "Xiaomi",
+"precio": 500000
 },
 {
 "Id": 5,
 "Modelo": "8",
-"Marca": "Vsett 8 web 1.jpg",
-"Imagen": "Vsett",
-"Precio":  300000
+"Imagen": "Vsett8web.jpg",
+"Marca": "Vsett",
+"precio":  300000
 },
 {
 "Id": 6,
 "Modelo": "10",
 "Imagen": "Zero10x.jpg",
 "Marca": "Zero", 
-"Precio": 480000
+"precio": 480000
 }
 ]
