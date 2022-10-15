@@ -14,12 +14,12 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://kit.fontawesome.com/3bc2ba478f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css"type="text/css">
-    <title>ScooterShop</title>
+    <title>Scootershop</title>
 </head>
 <body>
     <header>
         <img class= "animate__animated animate__backInLeft" id="logo" src="./images/Logo.png" width=100px; height="100px">
-        <p class="nombre">Scootershop</p>
+        <img src="./images/Logo2.png" width=350px; height="150px">
         <ul className="navbar-nav me-auto">
           <li className="nav-item">
           <a id="botonCarrito" data-bs-toggle="modal" data-bs-target="#idModal" class="btn btn-secondary"><i class="fas fa-shopping-cart fa-1x"></i></a>
@@ -27,7 +27,9 @@
         </ul>
     </header>
         <div class="menu"> 
-            <button id="btnBuscar">Buscar por Marca</button>
+            <button type="button" id="btnBuscar" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+              Buscar por Marca
+            </button>
             <input id="busqueda".toLowerCase()>
             </input>
 

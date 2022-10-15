@@ -1,40 +1,47 @@
 
 class Articulo {
-constructor(Id, Modelo, Imagen, Marca, precio) {
-        this.Id = Id,
-        this.Modelo = Modelo,
-        this.Imagen = Imagen,      
-        this.Marca = Marca,
-        this.precio = precio
-}}
+    constructor(Id, Modelo, Imagen, Marca, precio) {
+            this.Id = Id,
+            this.Modelo = Modelo,
+            this.Imagen = Imagen,      
+            this.Marca = Marca,
+            this.precio = precio
+    }
+}
+
 let Arts = []
+
 const cargarArticulos = async()=>{
     const response = await fetch("./articulos.json")
     const data = await response.json()
     console.log(data)
+    Arts =[]
         for (let Producto of data){
         let ArticuloNuevo = new Articulo (Producto.Id, Producto.Modelo, Producto.Imagen, Producto.Marca, Producto.precio)
         Arts.push(ArticuloNuevo)
-    }
+}
+
 localStorage.setItem("Arts", JSON.stringify(Arts)) 
 }
 cargarArticulos()
-let productosEnCarrito = JSON.parse(localStorage.getItem("carrito")) || []
 
+let productosEnCarrito = JSON.parse(localStorage.getItem("carrito")) || []
 
 if(localStorage.getItem("Arts")){
     Arts = JSON.parse(localStorage.getItem("Arts"))
-}
-else{
+}else{
     console.log("seteando por primera vez")
+    cargarArticulos()
+    window.location.reload()
 }
 
 let divProductos = document.getElementById("Productos")
 
 function mostrarProductos(array){
-divProductos.innerHTML = ""
-array.forEach((Articulo)=>{
-let nuevoProducto = document.createElement("div")
+    array.forEach((Articulo)=>{
+    divProductos.innerHTML = ""
+
+    let nuevoProducto = document.createElement("div")
 nuevoProducto.innerHTML =`<div id="${Articulo.Id}"class="card" style="width: 18rem;">
                         <img class="card-img-top" style="height:250px;" src="images/${Articulo.Imagen}" alt="${Articulo.Modelo}">
                         <div class="card-body">
@@ -46,7 +53,7 @@ nuevoProducto.innerHTML =`<div id="${Articulo.Id}"class="card" style="width: 18r
     divProductos.append(nuevoProducto)
 
     let agregarBtn = document.getElementById(`agregarBtn${Articulo.Modelo}`)
-    agregarBtn.addEventListener("click", ()=>{
+        agregarBtn.addEventListener("click", ()=>{
         agregarAlCarrito(Articulo)
     })
 })
@@ -79,10 +86,7 @@ mostrarProductos(productos2)
                 background: "linear-gradiente(to right, #00b09b, #96c93d)",
         }
         }).showToast();
-        
-        }
-
-
+}
 
 let botonBusqueda = document.getElementById("btnBuscar")
 botonBusqueda.addEventListener('click',buscarPorMarca)
@@ -99,15 +103,14 @@ function buscarPorMarca() {
         text: 'No se encontró ningún artículo de esa marca',
         }) 
         : 
-        marcaingresada.forEach((Articulo) => {
+    marcaingresada.forEach((Articulo) => {
         Swal.fire({
         imageUrl: src=`images/${Articulo.Imagen}`,
         text: `El modelo encontrado es: ${Articulo.Modelo}`,
         imageHeight: 500,
         imageAlt: 'A tall image'
         })
-    
-})}
+    })}
 let input = document.getElementById("busqueda")
     input.value = ""
 
@@ -115,7 +118,6 @@ let botonCarrito = document.getElementById("botonCarrito")
 let modalBody = document.getElementById("modal-body")
 let botonFinalizarCompra = document.getElementById("botonFinalizarCompra")
 let parrafoCompra = document.getElementById('precioTotal')
-
 
 botonCarrito.addEventListener("click", ()=>{
 cargarProductosCarrito(productosEnCarrito)
@@ -133,7 +135,7 @@ function cargarProductosCarrito(array){
                 <p class="card-text">$${productoCarrito.precio}</p><button class= "btn btn-danger" id="botonEliminar${productoCarrito.Id}"><i class="fas fa-trash-alt"></i></
                 button>
             </div>
-    </div>`
+        </div>`
     document.getElementById(`botonEliminar${productoCarrito.Id}`)
 })
 
@@ -147,7 +149,6 @@ array.forEach((productoCarrito, indice)=>{
     })
 })
     compraTotal(array)
-
 }
 function compraTotal(array){
     let acumulador = 0
@@ -173,7 +174,7 @@ Swal.fire({
         Swal.fire({
             title: `Compra Realizada`,
             icon: `success`,
-            confirmButtonColor: `green`,
+            confirmButtonColor: `blue`,
             text: `Muchas Gracias por su compra`,
     })
     productosEnCarrito=[]
@@ -183,9 +184,10 @@ Swal.fire({
             title: `Compra no realizada`,
             icon: `info`,
             text: `La compra no se realizó`,
-            confirmButtonColor: `green`,
+            confirmButtonColor: `grey`,
             timer:2000
         })
     }
 })
-}}
+}
+}

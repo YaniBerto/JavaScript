@@ -2,7 +2,7 @@
 margin:0;
 padding: 0;
 max-width: 100%;
-font-family: "Impact", sans-serif;}
+font-family: 'Montserrat', sans-serif;}
 body {background-color: black;}
 .menu{
  background-color: aliceblue;
@@ -10,7 +10,7 @@ body {background-color: black;}
  justify-content: flex-end;
 }
 .nombre{
-  font-family: Impact, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: xx-large;
 }
 logo
@@ -20,7 +20,7 @@ margin-left: 20px;
 padding: 20px;
 animation-duration: 2s;}
 header{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: 'Montserrat', sans-serif;
     display: flex;
     flex-direction: row;
     background-color: aliceblue;
@@ -38,12 +38,16 @@ height: 50px;
 h2{
     display: flex;
     justify-content: flex-start;
-    font-family: Impact;
+    font-family: 'Montserrat', sans-serif;
     padding-left: 25px;
     background-color: gray;
 }
 li{
   list-style-type: none;
+}
+#btnBuscar{
+  font-weight: bold;
+  border-radius: 10;
 }
 .btn-secondary{
   display: flex;
@@ -51,6 +55,12 @@ li{
   align-items: center;
   width: 80px;
   height: 80px;
+}
+button{
+  background-color: rgb(64, 64, 246);
+  color:white;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 .contacto{
   color: aliceblue;
