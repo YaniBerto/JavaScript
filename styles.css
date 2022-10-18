@@ -2,8 +2,11 @@
 margin:0;
 padding: 0;
 max-width: 100%;
+height: auto;
 font-family: 'Montserrat', sans-serif;}
-body {background-color: black;}
+body {
+  background-color: rgb(3, 9, 91);
+}
 .menu{
  background-color: aliceblue;
  display: flex;
@@ -13,12 +16,12 @@ body {background-color: black;}
   font-family: 'Montserrat', sans-serif;
   font-size: xx-large;
 }
-logo
-{width: 10rem;
-height: auto;
-margin-left: 20px;
-padding: 20px;
-animation-duration: 2s;}
+logo{
+  width: 10rem;
+  height: auto;
+  margin-left: 20px;
+  padding: 20px;
+  animation-duration: 2s;}
 header{
   font-family: 'Montserrat', sans-serif;
     display: flex;
@@ -53,9 +56,11 @@ li{
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgb(20, 20, 135);
   width: 80px;
   height: 80px;
 }
+
 button{
   background-color: rgb(64, 64, 246);
   color:white;
@@ -77,25 +82,16 @@ form{
   display: flex;
   justify-content: flex-end;
 }
-/* .productos{
-  background-color:#B6EEA6;
-  display: flex;
-  justify-content: center;
-  width: 350px;
-  margin-left: 50px;
-  height: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}*/
+
 .EstilosProductos{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
-.card{
+/*.card{
   margin: 1rem auto;
   border: 1px solid black;
 
-}
+}*/
 .caja_cards {
   display: flex;
   justify-content: center;

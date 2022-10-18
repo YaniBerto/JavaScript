@@ -15,7 +15,7 @@ const cargarArticulos = async()=>{
     const response = await fetch("./articulos.json")
     const data = await response.json()
     console.log(data)
-    Arts =[]
+    Arts = []
         for (let Producto of data){
         let ArticuloNuevo = new Articulo (Producto.Id, Producto.Modelo, Producto.Imagen, Producto.Marca, Producto.precio)
         Arts.push(ArticuloNuevo)
