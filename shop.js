@@ -169,6 +169,8 @@ function cargarProductosCarrito(array){
     })
     //document.getElementById(`botonEliminar${element.articulo.Id}`) 
 
+    
+
     array.forEach(element => {
         let btnEliminar = document.getElementById(`botonEliminar${element.articulo.Id}`)
         if(btnEliminar) {
@@ -177,7 +179,8 @@ function cargarProductosCarrito(array){
                 compra.forEach(element2 => {
                     if(element2.articulo.Id == id) {
                         element2.cantidad --                   
-                        localStorage.setItem("compra", JSON.stringify(array))                        
+                        localStorage.setItem("compra", JSON.stringify(array)) 
+                        cargarProductosCarrito(array)                       
                     }
                 })
             })
