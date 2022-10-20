@@ -1,42 +1,79 @@
-[{
+[
+{
 "Id": 1,
 "Modelo": "CS_516",
 "Imagen":"MoboxCS516.jpg",
 "Marca": "Mobox",
-"precio": 50000},
+"precio": 50000 
+},
 {
 "Id": 2,
+"Modelo": "F500",
+"Imagen": "F500F10.jpg",
+"Marca": "Fiat", 
+"precio": 60000 
+},
+{
+"Id": 3,
 "Modelo": "C85",
 "Imagen": "KanyC85.jpg",
 "Marca": "Kany",
 "precio": 200000 
 },
 {
-"Id": 3,
+"Id": 4,
 "Modelo": "Max G30P",
 "Imagen": "NineBotG30P.jpg",
 "Marca": "Ninebot",
 "precio":  400000
 },
 {
-"Id": 4,
+"Id": 5,
 "Modelo": "M365",
 "Imagen": "xiaomiM365.png",
 "Marca":  "Xiaomi",
 "precio": 500000
 },
 {
-"Id": 5,
+"Id": 6,
 "Modelo": "8",
 "Imagen": "Vsett8web.jpg",
 "Marca": "Vsett",
 "precio":  300000
 },
 {
-"Id": 6,
+"Id": 7,
 "Modelo": "10",
 "Imagen": "Zero10x.jpg",
 "Marca": "Zero", 
 "precio": 480000
-}
+},
+{
+"Id": 8,
+"Modelo": "Eagle",
+"Imagen": "Eagle.jpg",
+"Marca": "Minimotors",
+"precio": 500000 
+},
+{
+"Id": 9,
+"Modelo": "Dualtron-Spider",
+"Imagen": "dualtron-spider.png",
+"Marca": "Minimotors",
+"precio": 700000 
+},
+{
+"Id": 10,
+"Modelo": "Hoverboard Kany",
+"Imagen": "KanyCeleste.jpg",
+"Marca": "Kany",
+"precio": 35000 
+},
+{
+    "Id": 11,
+    "Modelo": "Qcycle",
+    "Imagen": "bicis.png",
+    "Marca": "Xiaomi",
+    "precio": 250000 
+    }
 ]

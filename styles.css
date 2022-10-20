@@ -2,25 +2,28 @@
 margin:0;
 padding: 0;
 max-width: 100%;
-font-family: "Impact", sans-serif;}
-body {background-color: black;}
+height: auto;
+font-family: 'Montserrat', sans-serif;}
+body {
+  background-color: rgb(3, 9, 91);
+}
 .menu{
  background-color: aliceblue;
  display: flex;
  justify-content: flex-end;
 }
 .nombre{
-  font-family: Impact, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: xx-large;
 }
-logo
-{width: 10rem;
-height: auto;
-margin-left: 20px;
-padding: 20px;
-animation-duration: 2s;}
+logo{
+  width: 10rem;
+  height: auto;
+  margin-left: 20px;
+  padding: 20px;
+  animation-duration: 2s;}
 header{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: 'Montserrat', sans-serif;
     display: flex;
     flex-direction: row;
     background-color: aliceblue;
@@ -38,19 +41,31 @@ height: 50px;
 h2{
     display: flex;
     justify-content: flex-start;
-    font-family: Impact;
+    font-family: 'Montserrat', sans-serif;
     padding-left: 25px;
     background-color: gray;
 }
 li{
   list-style-type: none;
 }
+#btnBuscar{
+  font-weight: bold;
+  border-radius: 10;
+}
 .btn-secondary{
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgb(20, 20, 135);
   width: 80px;
   height: 80px;
+}
+
+button{
+  background-color: rgb(64, 64, 246);
+  color:white;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 .contacto{
   color: aliceblue;
@@ -67,25 +82,16 @@ form{
   display: flex;
   justify-content: flex-end;
 }
-/* .productos{
-  background-color:#B6EEA6;
-  display: flex;
-  justify-content: center;
-  width: 350px;
-  margin-left: 50px;
-  height: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}*/
+
 .EstilosProductos{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
-.card{
+/*.card{
   margin: 1rem auto;
   border: 1px solid black;
 
-}
+}*/
 .caja_cards {
   display: flex;
   justify-content: center;
