@@ -23,24 +23,6 @@ const cargarArticulos = async()=>{
 localStorage.setItem("Arts", JSON.stringify(Arts)) 
 }
 
-/* const cargarArticulos = ()=>{
-    let url = "./articulos.json"
-    fetch(url)
-        .then(async res => {
-            let data = await res.json()
-            console.log(data)
-            Arts = []
-            for (let Producto of data){
-                let ArticuloNuevo = new Articulo (Producto.Id, Producto.Modelo, Producto.Imagen, Producto.Marca, Producto.precio)
-                Arts.push(ArticuloNuevo)
-            }
-            localStorage.setItem("Arts", JSON.stringify(Arts)) 
-        })
-        .then(res => console.log(res))
-        .catch( err => console.error(err));    
-} */
-
-
 cargarArticulos()
 
 let productosEnCarrito = JSON.parse(localStorage.getItem("carrito")) || []
