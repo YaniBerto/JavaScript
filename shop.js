@@ -1,4 +1,3 @@
-
 class Articulo {
 constructor(Id, Modelo, Imagen, Marca, precio) {
         this.Id = Id,
@@ -8,18 +7,42 @@ constructor(Id, Modelo, Imagen, Marca, precio) {
         this.precio = precio
 }}
 let Arts = []
+
+
 const cargarArticulos = async()=>{
     const response = await fetch("./articulos.json")
     const data = await response.json()
     console.log(data)
+    Arts = []
         for (let Producto of data){
         let ArticuloNuevo = new Articulo (Producto.Id, Producto.Modelo, Producto.Imagen, Producto.Marca, Producto.precio)
         Arts.push(ArticuloNuevo)
     }
-localStorage.setItem("Arts", JSON.stringify(Arts)) 
+    localStorage.setItem("Arts", JSON.stringify(Arts)) 
 }
+
+/* const cargarArticulos = ()=>{
+    let url = "./articulos.json"
+    fetch(url)
+        .then(async res => {
+            let data = await res.json()
+            console.log(data)
+            Arts = []
+            for (let Producto of data){
+                let ArticuloNuevo = new Articulo (Producto.Id, Producto.Modelo, Producto.Imagen, Producto.Marca, Producto.precio)
+                Arts.push(ArticuloNuevo)
+            }
+            localStorage.setItem("Arts", JSON.stringify(Arts)) 
+        })
+        .then(res => console.log(res))
+        .catch( err => console.error(err));    
+} */
+
+
 cargarArticulos()
 let productosEnCarrito = JSON.parse(localStorage.getItem("carrito")) || []
+
+let productos2 = JSON.parse(localStorage.getItem('Arts')) || []
 
 
 if(localStorage.getItem("Arts")){
@@ -31,9 +54,9 @@ else{
 
 let divProductos = document.getElementById("Productos")
 
-function mostrarProductos(array){
+function mostrarProductos(b){
 divProductos.innerHTML = ""
-array.forEach((Articulo)=>{
+b.forEach((Articulo)=>{
 let nuevoProducto = document.createElement("div")
 nuevoProducto.innerHTML =`<div id="${Articulo.Id}"class="card" style="width: 18rem;">
                         <img class="card-img-top" style="height:250px;" src="images/${Articulo.Imagen}" alt="${Articulo.Modelo}">
@@ -51,9 +74,10 @@ nuevoProducto.innerHTML =`<div id="${Articulo.Id}"class="card" style="width: 18r
     })
 })
 }
-let productos2 = JSON.parse(localStorage.getItem('Arts')) || []
+
 
 mostrarProductos(productos2)
+
     function agregarAlCarrito(Articulo){
         let articuloAgregado = productosEnCarrito.find((elem)=> (elem.Id == Articulo.Id))
                 if (articuloAgregado == undefined){
