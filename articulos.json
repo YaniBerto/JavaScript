@@ -75,5 +75,12 @@
     "Imagen": "bicis.png",
     "Marca": "Xiaomi",
     "precio": 250000 
+    },
+    {
+    "Id": 12,
+    "Modelo": "Casco",
+    "Imagen": "casco.jpg",
+    "Marca": "Vertigo",
+    "precio": 2500 
     }
 ]

@@ -87,11 +87,11 @@ form{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
-/*.card{
+.card{
   margin: 1rem auto;
   border: 1px solid black;
 
-}*/
+}
 .caja_cards {
   display: flex;
   justify-content: center;
