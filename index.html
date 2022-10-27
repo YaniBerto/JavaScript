@@ -30,66 +30,77 @@
             <button type="button" id="btnBuscar" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
               Buscar por Marca
             </button>
-            <input id="busqueda" class="campo"type="text"><li class="sugerencias"></li>
-            </input>
-        </div>    
+            <button type="button" id="modal_btn" class="btn btn-primary">
+              Abrir modal
+            </button>
+            <input id="busqueda" class="campo"type="text"/><li class="sugerencias"></li>            
+        </div>
             <h2>
             Elije tu producto
             </h2>
 
 <div id = "Productos" class="EstilosProductos"></div> 
 
-<div class="modal fade" id="idModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Carrito de Compras</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="modal-body">
-          
-        </div>
-        <div class="row ml-ato">
-          <p id="precioTotal"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" data-bs-dismiss="modal" class="btn btn-succes"
-          id="botonFinalizarCompra">Finalizar Compra</button>
-        </div>
+
+
+<!-- Modal del carrito -->
+
+<div class="modal fade" id="idModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Carrito de Compras</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modal-body-carrito">
+        
+      </div>
+      <div class="row ml-ato">
+        <p id="precioTotal"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" data-bs-dismiss="modal" class="btn btn-succes"
+        id="botonFinalizarCompra">Finalizar Compra</button>
       </div>
     </div>
   </div>
-  <div class="modal fade" id="modalBusqueda" tabindex="-1" aria-labelledby="ModalBusqueda" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="ModalBusqueda">Coincidencias</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="modal-body">
-          
-        </div>
-        <div class="row ml-ato">
-          <p id="precioTotal"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>        
-        </div>
+</div>
+
+<!-- Modal de busqueda -->
+
+<!-- <div class="modal fade" id="modalBusqueda" tabindex="-1" aria-labelledby="ModalBusqueda" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalBusqueda">Coincidencias</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        
+      </div>
+      <div class="row ml-ato">
+        <p id="precioTotal"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>        
       </div>
     </div>
   </div>
-    <div id="modalBusqueda" class="modal-overlay">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Coincidencias</h3>
-          <span class="closeBtn">X</span>
+</div> -->
+
+<div id="modalBusqueda" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Coincidencias</h3>
+      <span class="closeBtn"> X</span>
     </div>
     <div class="modal-body">
-      </div>
-    </div>  
-  </div>  
+      <p>Hello</p>
+      <p>Showing Dave how to make a modal</p>
+    </div>    
+  </div>
+</div>
 <footer>
   <p class="contacto">CONTACTO</p>
     <form>

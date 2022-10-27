@@ -105,48 +105,84 @@ let botonBusqueda = document.getElementById("btnBuscar")
 
 botonBusqueda.addEventListener('click',buscarPorMarca)
 let input = document.getElementById("busqueda")
-input.addEventListener("keypress", function(event){
-    if (event.key === "Enter"){
-        event.preventDefault();
-        document.getElementById("btnBuscar").click();
-        }
+let string = ""
+input.addEventListener("keydown", function(event){    
+    
+
+    if (event.key === "Backspace"){        
+        string.slice(0, -1)
+    } else {
+        string += event.key
+    }
+
+    autoComplete(string)
+
+    if (event.key === "Enter"){        
+        buscarPorMarca()
+    }
         
 });
 
 function buscarPorMarca() {
 
     let marcaingresada = Arts.filter((brand) => brand.Marca.toLowerCase() == busqueda.value.toLowerCase())
-    localStorage.setItem("marcaingresada",JSON.stringify(marcaingresada))
+    //localStorage.setItem("marcaingresada",JSON.stringify(marcaingresada))
     input.value= ""
-    if (marcaingresada.length == 0){
-    event.preventDefault()
+    if (marcaingresada.length == 0) {
+        event.preventDefault()
         Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'No se encontró ningún artículo de esa marca'
         })
-    }else{ showModal()
-        marcaingresada.forEach((element)=>{
-        })
-    }
+    } else {
+        showModal()        
+        marcaingresada.forEach((element) =>{           
 
-console.log(marcaingresada)
+            
+        })
+    }   
+
+    console.log(marcaingresada)
+}
+function autoComplete(palabra){
+    console.log(palabra)
+    console.log(Arts.filter(element => element.Marca == palabra))
 }
 
+
+
+
+/* const campo = document.querySelector(`.campo`)
+const sugerencias = document.querySelector(`.sugerencias`)
+campo.addEventListener(`input`, (target) => {
+    const datosDelCampo = target.value
+    if (datosDelCampo.length){
+        const autoCompleteValores = autoComplete(datosDelCampo)
+        sugerencias.innertHTML=`${autoCompleteValores.map((value)=>{
+            return(
+                `<li>${value}</li>`)
+        }).join('')}
+    `}
+}) */
+
+
 let botonCarrito = document.getElementById("botonCarrito")
-let modalBody = document.getElementById("modal-body")
+let modalBody = document.getElementById("modal-body-carrito")
 let botonFinalizarCompra = document.getElementById("botonFinalizarCompra")
 let parrafoCompra = document.getElementById('precioTotal')
 
 botonCarrito.addEventListener("click", ()=>{
-cargarProductosCarrito(compra)
+    let items_compra = JSON.parse(localStorage.getItem("compra"))
+    console.log("items_compra: ", items_compra)
+cargarProductosCarrito(items_compra)
 })
 
 function cargarProductosCarrito(array){
-    
+   
     modalBody.innerHTML =""
     array.forEach((element)=>{
-        if(element.cantidad>0){
+        if(element.cantidad > 0){
             let subtotal = element.cantidad * element.articulo.precio
         modalBody.innerHTML +=
         `<div class="card border-primary mb-3" id ="productoCarrito${element.articulo.Id}"
@@ -169,21 +205,21 @@ function cargarProductosCarrito(array){
         }    
     })
     
-array.forEach(element => {
-    let btnEliminar = document.getElementById(`botonEliminar${element.articulo.Id}`)
-    if(btnEliminar){
-        btnEliminar.addEventListener("click", () => {
-            let id = element.articulo.Id
-            compra.forEach(element2 => {
-                if(element2.articulo.Id == id){
-                    element2.cantidad --
-                    localStorage.setItem("compra", JSON.stringify(array))
-                    cargarProductosCarrito(array)
-                }
+    array.forEach(element => {
+        let btnEliminar = document.getElementById(`botonEliminar${element.articulo.Id}`)
+        if(btnEliminar){
+            btnEliminar.addEventListener("click", () => {
+                let id = element.articulo.Id
+                compra.forEach(element2 => {
+                    if(element2.articulo.Id == id){
+                        element2.cantidad --
+                        localStorage.setItem("compra", JSON.stringify(array))
+                        cargarProductosCarrito(array)
+                    }
+                })
             })
-        })
-    }
-})
+        }
+    })
 
     compraTotal(array)
 }
@@ -238,7 +274,34 @@ let closeBtn = document.getElementsByClassName(`closeBtn`)[0];
 closeBtn.addEventListener(`click`, CloseModal);
 window.addEventListener(`click`, outsideClick);
 
-modal_btn.addEventListener(`click`)
+let modal_btn = document.getElementById("modal_btn")
+
+let modalBuscar = document.getElementById('modalBusqueda')
+
+let closeBtn = document.getElementsByClassName('closeBtn')[0];
+
+closeBtn.addEventListener('click', closeModal);
+// Listen for outside click
+window.addEventListener('click', outsideClick);
+
+modal_btn.addEventListener('click',autoComplete)
+
+function showModal() {
+    modalBuscar.style.display = 'block';
+}
+
+// Close modal
+function closeModal(){
+    modalBuscar.style.display = 'none';
+  }
+  
+  // Click outside and close
+  function outsideClick(e){
+    if(e.target == modalBuscar){
+        modalBuscar.style.display = 'none';
+    }
+  }
+
 
 function showModal(){
     modalBuscar.style.display = `block`;
