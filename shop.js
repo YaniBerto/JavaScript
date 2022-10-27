@@ -118,44 +118,20 @@ function buscarPorMarca() {
     let marcaingresada = Arts.filter((brand) => brand.Marca.toLowerCase() == busqueda.value.toLowerCase())
     localStorage.setItem("marcaingresada",JSON.stringify(marcaingresada))
     input.value= ""
-    marcaingresada.length == 0 ?
+    if (marcaingresada.length == 0){
+    event.preventDefault()
         Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'No se encontró ningún artículo de esa marca'
         })
-    :marcaingresada.forEach((Articulo) =>{
-        Swal.fire({
-        imageUrl: src=`images/${Articulo.Imagen}`,
-        text: `El articulo encontrado es: ${Articulo.Modelo}`,
-        imageHeight: 500,
-        imageAlt: 'A tall image',
+    }else{ showModal()
+        marcaingresada.forEach((element)=>{
         })
-})
+    }
 
 console.log(marcaingresada)
 }
-function autoComplete(Article){
-    const Arts = [];
-    return Arts.filter((valor)=>{
-        const valorMinuscula = valor.toLowerCase()
-        const ArticleMinuscula= valor.toLowerCase()
-        return valorMinuscula.includes(ArticleMinuscula)
-    })
-}
-const campo = document.querySelector(`.campo`)
-const sugerencias = document.querySelector(`.sugerencias`)
-campo.addEventListener(`input`, ({target})=>{
-    const datosDelCampo = target.value
-    if (datosDelCampo.length){
-        const autoCompleteValores = autoComplete(datosDelCampo)
-        sugerencias.innertHTML=`${autoCompleteValores.map((value)=>{
-            return(
-                `<li>${value}</li>`)
-        }).join('')}
-    `}
-})
-
 
 let botonCarrito = document.getElementById("botonCarrito")
 let modalBody = document.getElementById("modal-body")
@@ -253,4 +229,25 @@ Swal.fire({
     }
 })
 }
+let modal_btn = document.getElementById("modal_btn")
 
+let modalBuscar = document.getElementById(`modalBusqueda`)
+
+let closeBtn = document.getElementsByClassName(`closeBtn`)[0];
+
+closeBtn.addEventListener(`click`, CloseModal);
+window.addEventListener(`click`, outsideClick);
+
+modal_btn.addEventListener(`click`)
+
+function showModal(){
+    modalBuscar.style.display = `block`;
+}
+function CloseModal(){
+    modalBuscar.style.display = `none`;
+}
+function outsideClick(e){
+    if(e.target == modalBuscar){
+        modalBuscar.style.display = `none`;
+}
+}
