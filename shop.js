@@ -10,6 +10,9 @@ class Articulo {
 
 let Arts = []
 let compra = []
+
+JSON.parse(localStorage.getItem("compra")) ?  compra = JSON.parse(localStorage.getItem("compra")) : compra = []
+
 let marcaingresada = []
 
 const cargarArticulos = async()=>{
@@ -82,7 +85,8 @@ function agregarAlCarrito(Articulo){
                 }
             }).showToast();
         }else{
-            compra.forEach(element =>{
+            let compras = JSON.parse(localStorage.getItem("compra"))
+            compras.forEach(element =>{
                 if(element.articulo.Id == Articulo.Id){
             element.cantidad ++
         }
@@ -95,7 +99,7 @@ function agregarAlCarrito(Articulo){
             position: "center",
             className: "Info",
                 style:{
-                background: "linear-gradiente(to right, #00b09b, #96c93d)",
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
         }
         }).showToast();
 }
@@ -108,14 +112,11 @@ let input = document.getElementById("busqueda")
 let string = ""
 input.addEventListener("keydown", function(event){    
     
-
     if (event.key === "Backspace"){        
         string.slice(0, -1)
     } else {
         string += event.key
     }
-
-    autoComplete(string)
 
     if (event.key === "Enter"){        
         buscarPorMarca()
@@ -124,8 +125,8 @@ input.addEventListener("keydown", function(event){
 });
 
 function buscarPorMarca() {
-
-    let marcaingresada = Arts.filter((brand) => brand.Marca.toLowerCase() == busqueda.value.toLowerCase())
+    let marcaingresada = Arts.filter((x) => x.Marca.toLowerCase() == busqueda.value.toLowerCase())
+    console.log("marcaingresada", marcaingresada)
     //localStorage.setItem("marcaingresada",JSON.stringify(marcaingresada))
     input.value= ""
     if (marcaingresada.length == 0) {
@@ -135,38 +136,27 @@ function buscarPorMarca() {
         title: 'Oops...',
         text: 'No se encontró ningún artículo de esa marca'
         })
-    } else {
-        showModal()        
-        marcaingresada.forEach((element) =>{           
-
-            
+    } else {       
+        modalBody2.innerHTML=""
+        marcaingresada.forEach((element)=>{
+            modalBody2.innerHTML +=
+            `<div class="card border-primary mb-3" id ="${element.Id}"
+            style="max-width: 540px;">
+                <img class="card-img-top" src="images/${element.Imagen}" alt="${element.Modelo}">
+                <div class="card-body">
+                    <h4 class="card-title">${element.Modelo}</h4>
+                    <br>
+                    <br>
+                </div>
+            </div>`
         })
+        showModal()
     }   
 
     console.log(marcaingresada)
 }
-function autoComplete(palabra){
-    console.log(palabra)
-    console.log(Arts.filter(element => element.Marca == palabra))
-}
 
-
-
-
-/* const campo = document.querySelector(`.campo`)
-const sugerencias = document.querySelector(`.sugerencias`)
-campo.addEventListener(`input`, (target) => {
-    const datosDelCampo = target.value
-    if (datosDelCampo.length){
-        const autoCompleteValores = autoComplete(datosDelCampo)
-        sugerencias.innertHTML=`${autoCompleteValores.map((value)=>{
-            return(
-                `<li>${value}</li>`)
-        }).join('')}
-    `}
-}) */
-
-
+let modalBody2 = document.getElementById("modalBusqueda")
 let botonCarrito = document.getElementById("botonCarrito")
 let modalBody = document.getElementById("modal-body-carrito")
 let botonFinalizarCompra = document.getElementById("botonFinalizarCompra")
@@ -179,7 +169,6 @@ cargarProductosCarrito(items_compra)
 })
 
 function cargarProductosCarrito(array){
-   
     modalBody.innerHTML =""
     array.forEach((element)=>{
         if(element.cantidad > 0){
@@ -208,11 +197,12 @@ function cargarProductosCarrito(array){
     array.forEach(element => {
         let btnEliminar = document.getElementById(`botonEliminar${element.articulo.Id}`)
         if(btnEliminar){
-            btnEliminar.addEventListener("click", () => {
+            btnEliminar.addEventListener("click", () => {                
                 let id = element.articulo.Id
-                compra.forEach(element2 => {
-                    if(element2.articulo.Id == id){
-                        element2.cantidad --
+                //let compras = JSON.parse(localStorage.getItem("compra"))                
+                array.forEach(element2 => {
+                    if(element2.articulo.Id == id){       
+                        element2.cantidad --               
                         localStorage.setItem("compra", JSON.stringify(array))
                         cargarProductosCarrito(array)
                     }
@@ -234,6 +224,7 @@ function compraTotal(array){
     parrafoCompra.innerHTML = `El total de su carrito es $${acumulador}`
 }
 botonFinalizarCompra.addEventListener("click", ()=>{finalizarCompra()})
+
 
 function finalizarCompra(){
 Swal.fire({
@@ -272,36 +263,24 @@ let modalBuscar = document.getElementById(`modalBusqueda`)
 let closeBtn = document.getElementsByClassName(`closeBtn`)[0];
 
 closeBtn.addEventListener(`click`, CloseModal);
-window.addEventListener(`click`, outsideClick);
 
-let modal_btn = document.getElementById("modal_btn")
-
-let modalBuscar = document.getElementById('modalBusqueda')
-
-let closeBtn = document.getElementsByClassName('closeBtn')[0];
-
-closeBtn.addEventListener('click', closeModal);
 // Listen for outside click
 window.addEventListener('click', outsideClick);
 
 modal_btn.addEventListener('click',autoComplete)
 
-function showModal() {
-    modalBuscar.style.display = 'block';
-}
 
 // Close modal
 function closeModal(){
     modalBuscar.style.display = 'none';
-  }
-  
+}
+
   // Click outside and close
-  function outsideClick(e){
+function outsideClick(e){
     if(e.target == modalBuscar){
         modalBuscar.style.display = 'none';
     }
-  }
-
+}
 
 function showModal(){
     modalBuscar.style.display = `block`;
