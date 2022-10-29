@@ -18,7 +18,6 @@ let marcaingresada = []
 const cargarArticulos = async()=>{
     const response = await fetch("./articulos.json")
     const data = await response.json()
-    console.log(data)
     Arts = []
         for (let Producto of data){
         let ArticuloNuevo = new Articulo (Producto.Id, Producto.Modelo, Producto.Imagen, Producto.Marca, Producto.precio)
@@ -36,9 +35,7 @@ let productosEnCarrito = JSON.parse(localStorage.getItem("carrito")) || []
 if(localStorage.getItem("Arts")){
     Arts = JSON.parse(localStorage.getItem("Arts"))
 }else{
-    console.log("seteando por primera vez")
-    cargarArticulos()
-    
+    cargarArticulos()    
 }
 
 function mostrarProductos(array){
@@ -66,12 +63,13 @@ function mostrarProductos(array){
 
 function agregarAlCarrito(Articulo){
         let articuloAgregado = productosEnCarrito.find((elem)=> (elem.Id == Articulo.Id))
-                if (articuloAgregado == null){
+                if (articuloAgregado == null){                    
                     let item = {
                         articulo: Articulo,
                         cantidad: 1
                     }
-                    compra.push(item)
+
+                    compra.push(item)                    
                     productosEnCarrito.push(Articulo)
                 localStorage.setItem("carrito", JSON.stringify(productosEnCarrito))
                 localStorage.setItem("compra", JSON.stringify(compra))
@@ -85,13 +83,15 @@ function agregarAlCarrito(Articulo){
                 }
             }).showToast();
         }else{
-            let compras = JSON.parse(localStorage.getItem("compra"))
-            compras.forEach(element =>{
+            compra.forEach(element =>{
                 if(element.articulo.Id == Articulo.Id){
-            element.cantidad ++
-        }
-    })
-    localStorage.setItem("compra", JSON.stringify(compra))
+                    element.cantidad ++
+                    localStorage.setItem("compra", JSON.stringify(compra))
+                }
+            })
+
+            
+            
         Toastify({
             text:"El producto ya se encuentra en el carrito",
             duration: 2000,
@@ -103,7 +103,7 @@ function agregarAlCarrito(Articulo){
         }
         }).showToast();
 }
-console.log(compra)
+
 }
 let botonBusqueda = document.getElementById("btnBuscar")
 
@@ -126,8 +126,6 @@ input.addEventListener("keydown", function(event){
 
 function buscarPorMarca() {
     let marcaingresada = Arts.filter((x) => x.Marca.toLowerCase() == busqueda.value.toLowerCase())
-    console.log("marcaingresada", marcaingresada)
-    //localStorage.setItem("marcaingresada",JSON.stringify(marcaingresada))
     input.value= ""
     if (marcaingresada.length == 0) {
         event.preventDefault()
@@ -152,8 +150,6 @@ function buscarPorMarca() {
         })
         showModal()
     }   
-
-    console.log(marcaingresada)
 }
 
 let modalBody2 = document.getElementById("modalBusqueda")
@@ -164,7 +160,6 @@ let parrafoCompra = document.getElementById('precioTotal')
 
 botonCarrito.addEventListener("click", ()=>{
     let items_compra = JSON.parse(localStorage.getItem("compra"))
-    console.log("items_compra: ", items_compra)
 cargarProductosCarrito(items_compra)
 })
 
@@ -174,16 +169,14 @@ function cargarProductosCarrito(array){
         if(element.cantidad > 0){
             let subtotal = element.cantidad * element.articulo.precio
         modalBody.innerHTML +=
-        `<div class="card border-primary mb-3" id ="productoCarrito${element.articulo.Id}"
-        style="max-width: 540px;">
+        `<div class="card border-primary mb-3" id ="productoCarrito${element.articulo.Id}" style="max-width: 540px;">
+        <div class="card-body">
             <img class="card-img-top" src="images/${element.articulo.Imagen}" alt="${element.articulo.Modelo}">
-            <div class="card-body">
-                <h4 class="card-title">${element.articulo.Modelo}</h4>
-                <div class="card-text mb-1>${element.cantidad} x $${element.articulo.precio}</div>
-                <span>Subtotal: $${subtotal}</span>
-                <br>
-                <br>
-                <button class="btn btn-danger" id="botonEliminar${element.articulo.Id}"><i class="fas fa-trash-alt"></i></button>
+            <h5 class="card-title">${element.articulo.Modelo}</h5>
+                <div class="mb-1">${element.cantidad} x $${element.articulo.precio}</div>
+                <div class="d-flex justify-content-between align-items-end">
+                <span>Subtotal: $${subtotal}</span><button class="btn btn-light" id="botonEliminar${element.articulo.Id}"><i class="fas fa-trash-alt text-danger"></i></button>
+                </div>
             </div>
         </div>`
         }else{
@@ -198,11 +191,27 @@ function cargarProductosCarrito(array){
         let btnEliminar = document.getElementById(`botonEliminar${element.articulo.Id}`)
         if(btnEliminar){
             btnEliminar.addEventListener("click", () => {                
-                let id = element.articulo.Id
-                //let compras = JSON.parse(localStorage.getItem("compra"))                
+                let id = element.articulo.Id               
                 array.forEach(element2 => {
                     if(element2.articulo.Id == id){       
-                        element2.cantidad --               
+                        element2.cantidad --
+                        if (element2.cantidad == 0) {
+                            let ind = compra.findIndex(object => {
+                                return object.articulo.Id == id;
+                            });
+                            compra.splice(ind, 1);
+
+                            let indexOfCompra = array.findIndex(object => {
+                                return object.articulo.Id == id;
+                            });
+                            array.splice(indexOfCompra, 1);
+                            
+                            let indexOfCarrito = productosEnCarrito.findIndex(object => {
+                                return object.Id == id;
+                            });
+                            productosEnCarrito.splice(indexOfCarrito, 1);
+                            localStorage.setItem("carrito", JSON.stringify(productosEnCarrito))
+                        }
                         localStorage.setItem("compra", JSON.stringify(array))
                         cargarProductosCarrito(array)
                     }
@@ -221,7 +230,7 @@ function compraTotal(array){
     },0) 
     acumulador == 0?parrafoCompra.innerHTML = `<p>No hay productos en el carrito</p>`
     :
-    parrafoCompra.innerHTML = `El total de su carrito es $${acumulador}`
+    parrafoCompra.innerHTML = `<div class="px-4"> El total de su carrito es $${acumulador}</div>`
 }
 botonFinalizarCompra.addEventListener("click", ()=>{finalizarCompra()})
 
